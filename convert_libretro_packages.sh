@@ -20,19 +20,18 @@ pushd ${LIBRETRO_CORES_SH_DIR}
 		name=${file##*lr-}
 		name=${name%*.sh}
 		license_url=${rp_module_licence##* }
-		
+
 		repo=`grep ${file} -e 'gitPullOrClone'`
 		repo="${repo##*https://}"
 		repo="${repo%% *}"
 		echo ${repo}
-		
+
 		license_file="${WORKDIR}/license-${name}"
 		[ ! -f ${license_file} ] && wget -O "" "${license_url}"
 		license_md5=`md5sum ${license_file}`
 		license_md5=${license_md5%% *}
-		
+
 		[[ -z ${repo} ]] && continue
-		
 
 		mkdir -p ${LIBRETRO_CORES_BB_DIR}/${name}-libretro
 		recipe="${LIBRETRO_CORES_BB_DIR}/${name}-libretro/${name}-libretro.bb"
@@ -45,8 +44,6 @@ pushd ${LIBRETRO_CORES_SH_DIR}
 		append_line ${recipe} "S = \"\${WORKDIR}/git\""
 		append_line ${recipe} "SRC_URI = \"gitsm://${repo};protocol=https\""
 		append_line ${recipe} "SRCREV = \"\${AUTOREV}\""
-		
-		
 	done
 popd
 
