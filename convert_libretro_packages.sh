@@ -35,7 +35,7 @@ pushd ${LIBRETRO_CORES_SH_DIR}
 
 		mkdir -p ${LIBRETRO_CORES_BB_DIR}/${name}-libretro
 		recipe="${LIBRETRO_CORES_BB_DIR}/${name}-libretro/${name}-libretro.bb"
-		echo > ${recipe}
+		echo -n > ${recipe}
 		append_line ${recipe} "DESCRIPTION = \"${rp_module_desc}\"\n"
 		append_line ${recipe} "LICENSE = \"${rp_module_licence%% *}\""
 		append_line ${recipe} "LIC_FILES_CHKSUM = \"file://${rp_module_licence##*/};md5sum=${license_md5}\"\n"
