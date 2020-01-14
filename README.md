@@ -8,5 +8,5 @@ Run:
 # cd retropie-package-converter
 # ./convert_libretro_packages.sh
 ```
-After done script will leave recipes in `retropie-package-converter/workdir/`
+After done script will leave recipes in `retropie-package-converter/results/`
 
