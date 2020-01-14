@@ -44,7 +44,10 @@ pushd ${LIBRETRO_CORES_SH_DIR}
 		append_line ${recipe} "S = \"\${WORKDIR}/git\""
 		append_line ${recipe} "SRC_URI = \"gitsm://${repo};protocol=https\""
 		append_line ${recipe} "SRCREV = \"\${AUTOREV}\""
+
+		sed -i "s/GPL2/GPLv2/g" ${recipe}
+		sed -i "s/GPL3/GPLv3/g" ${recipe}
+		sed -i "s/NONCOM/proprietary/g" ${recipe}
 	done
 popd
-
 
