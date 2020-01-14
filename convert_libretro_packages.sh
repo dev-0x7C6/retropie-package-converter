@@ -33,7 +33,7 @@ pushd ${LIBRETRO_CORES_SH_DIR}
 		core=`grep ${file} -e "_libretro.so'"`
 		core=${core//\'}
 		core=${core// }
-		core=${core%%_*}
+		core=${core%_*}
 
 		license_file="${WORKDIR}/license-${name}"
 		[ ! -f ${license_file} ] && wget -O "" "${license_url}"
