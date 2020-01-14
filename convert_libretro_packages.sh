@@ -23,6 +23,7 @@ pushd ${LIBRETRO_CORES_SH_DIR}
 		
 		repo=`grep ${file} -e 'gitPullOrClone'`
 		repo="${repo##*https://}"
+		repo="${repo%% *}"
 		echo ${repo}
 		
 		license_file="${WORKDIR}/license-${name}"
