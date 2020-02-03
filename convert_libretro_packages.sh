@@ -56,10 +56,8 @@ pushd ${LIBRETRO_CORES_SH_DIR}
 		append_line ${recipe} "DESCRIPTION = \"${rp_module_desc}\"\n"
 		append_line ${recipe} "LICENSE = \"${rp_module_licence%% *}\""
 		append_line ${recipe} "LIC_FILES_CHKSUM = \"file://${rp_module_licence##*/};md5=${license_md5}\"\n"
-		append_line ${recipe} "inherit libretro\n"
-		append_line ${recipe} "S = \"\${WORKDIR}/git\""
-		append_line ${recipe} "SRC_URI = \"gitsm://${repo};protocol=https\""
-		append_line ${recipe} "SRCREV = \"\${AUTOREV}\"\n"
+		append_line ${recipe} "inherit libretro-git\n"
+		append_line ${recipe} "LIBRETRO_URI = \"${repo}\""
 		append_line ${recipe} "LIBRETRO_CORE = \"${core}\"\n"
 
 		sed -i "s/GPL2/GPLv2/g" ${recipe}
