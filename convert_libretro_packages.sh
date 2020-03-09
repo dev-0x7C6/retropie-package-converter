@@ -17,11 +17,13 @@ function append_line() {
 pushd ${LIBRETRO_CORES_SH_DIR}
 	for file in `find . -iname \*.sh`; do
 		source ${file}
-		name=${file##*lr-}
-		name=${name%*.sh}
+		name=${rp_module_id##*lr-}
 		license_url=${rp_module_licence##* }
 
-		cp -f "${file}" "${LIBRETRO_CORES_BB_DIR}/${name}-libretro/orginal.tmp"
+		echo -e "core: \e[32m$name\e[0m"
+		
+		mkdir -pv ${LIBRETRO_CORES_BB_DIR}/${name}-libretro
+		cp -fv "${file}" "${LIBRETRO_CORES_BB_DIR}/${name}-libretro/orginal.tmp"
 
 		unset repo
 		unset core
@@ -36,7 +38,8 @@ pushd ${LIBRETRO_CORES_SH_DIR}
 		core=${core%_*}
 
 		license_file="${WORKDIR}/license-${name}"
-		[ ! -f ${license_file} ] && wget -O "" "${license_url}"
+		echo -e "license url: \e[32m$license_url\e[0m"
+		[ ! -f ${license_file} ] && wget -O "${license_file}" "${license_url}"
 		license_md5=`md5sum ${license_file}`
 		license_md5=${license_md5%% *}
 
@@ -50,7 +53,6 @@ pushd ${LIBRETRO_CORES_SH_DIR}
 			repo="unknown"
 		fi
 
-		mkdir -p ${LIBRETRO_CORES_BB_DIR}/${name}-libretro
 		recipe="${LIBRETRO_CORES_BB_DIR}/${name}-libretro/${name}-libretro.bb"
 		echo -n > ${recipe}
 		append_line ${recipe} "DESCRIPTION = \"${rp_module_desc}\"\n"
